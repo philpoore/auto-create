@@ -11,12 +11,15 @@ phelp() {
 }
 
 #Setting up some of the default variables
+datastore='sata3-1'
 CPU=2
 RAM=4096
 SIZE=20
 ISO=""
 FLAG=true
 ERR=false
+
+cd /vmfs/volumes/$datastore
 
 #Error checking will take place as well
 #the NAME has to be filled out (i.e. the $NAME variable needs to exist)
@@ -148,8 +151,8 @@ ethernet0.generatedAddressOffset = "0"
 guestOS = "other26xlinux-64"
 EOF
 
-#Adding Virtual Machine to VM register - modify your path accordingly!!
-MYVM=`vim-cmd solo/registervm /vmfs/volumes/datastore1/${NAME}/${NAME}.vmx`
+
+MYVM=`vim-cmd solo/registervm /vmfs/volumes/$datastore/${NAME}/${NAME}.vmx`
 #Powering up virtual machine:
 vim-cmd vmsvc/power.on $MYVM
 
